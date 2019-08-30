@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="entry_deep_duplicator" status="experimental" xmlns="http://getsymphony.com/schemas/extension/1.0">
+	<name>Entry Deep Duplicator</name>
+	<description>
+		Duplicate an entry and it's relations via entry_relationship_field and duplicate files.
+	</description>
+	<types>
+		<type>Content</type>
+	</types>
+	<authors>
+		<author>
+			<name github="fhamon" symphony="fhamon" twitter="FrederickHamon">Frédérick Hamon</name>
+		</author>
+		<author>
+			<name github="DeuxHuitHuit" symphony="nitriques" twitter="DeuxHuitHuit">Deux Huit Huit</name>
+			<website>https://deuxhuithuit.com/</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="0.1.0" date="2019-08-29" min="4.0.0" max="4.x.x">
+			- Initial release
+		</release>
+	</releases>
+</extension>
