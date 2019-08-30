@@ -27,6 +27,10 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
                     ->execute()
                     ->next();
 
+        if (empty($entry)) {
+            return;
+        }
+
         $fields = FieldManager::select()
                     ->where(['parent_section' => '26'])
                     ->execute()
@@ -92,7 +96,6 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
                         $computedData['file-' . $lang] = $newfilename;
                     }
                 }
-
             }
 
             $newEntry->setData($field->get('id'), $computedData);
