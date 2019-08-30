@@ -132,7 +132,7 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
 
         $section = SectionManager::select()->section($newEntry->get('section_id'))->execute()->next();
 
-        redirect(SYMPHONY_URL . '/publish/' . $section->get('handle') . '/edit/' . $newEntry->get('id') . '/');
+        redirect(SYMPHONY_URL . '/publish/' . $section->get('handle') . '/edit/' . $newEntry->get('id') . '/created/');
     }
 
 }
