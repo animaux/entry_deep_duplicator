@@ -32,7 +32,7 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
         }
 
         $fields = FieldManager::select()
-                    ->where(['parent_section' => '26'])
+                    ->section($entry->get('section_id'))
                     ->execute()
                     ->rows();
 
