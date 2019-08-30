@@ -16,7 +16,7 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
         parent::__construct();
     }
 
-    private function duplicate($id)
+    private function duplicate($id, $preventCopy = false)
     {
         $entry = EntryManager::select()->entry($id)->execute()->next();
 
@@ -27,8 +27,14 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
                     ->execute()
                     ->next();
 
+        $section = SectionManager::select()->section($entry->get('section_id'))->execute()->next();
+
         if (empty($entry)) {
             return;
+        }
+
+        if ($preventCopy === true && $section->get('duplicate_prevent_copy') === 'yes') {
+            return $entry;
         }
 
         $fields = FieldManager::select()
@@ -57,7 +63,7 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
                         if (isset($this->duplications[$relation])) {
                             $newRelations[] = $this->duplications[$relation];
                         } else {
-                            $dup = $this->duplicate($relation);
+                            $dup = $this->duplicate($relation, true);
 
                             if (!empty($dup) && !empty($dup->get('id'))) {
                                 $newRelations[] = $dup->get('id');
