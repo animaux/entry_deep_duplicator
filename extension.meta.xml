@@ -17,6 +17,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.0.0" date="2019-09-05" min="4.0.0" max="4.x.x">
+			- Append `- copy` to the first field's value when an entry is duplicated
+		</release>
 		<release version="0.1.0" date="2019-08-29" min="4.0.0" max="4.x.x">
 			- Initial release
 		</release>

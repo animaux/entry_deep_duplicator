@@ -37,10 +37,7 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
             return $entry;
         }
 
-        $fields = FieldManager::select()
-                    ->section($entry->get('section_id'))
-                    ->execute()
-                    ->rows();
+        $fields = $section->fetchFields();
 
         $newEntry = EntryManager::create();
         $newEntry->set('section_id', $entry->get('section_id'));
@@ -50,8 +47,15 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
 
         $this->duplications[$entry->get('id')] = $newEntry->get('id');
 
+        $index = 0;
+
         foreach ($fields as $field) {
             $computedData = $entry->getData($field->get('id'));
+
+            if ($index === 0 && $field->get('type') === 'input') {
+                $computedData['value'] .= ' - copy';
+                $computedData['handle'] .= '-copy';
+            }
 
             if ($field->get('type') === 'entry_relationship') {
 
@@ -105,6 +109,7 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
             }
 
             $newEntry->setData($field->get('id'), $computedData);
+            $index++;
         }
 
         $newEntry->commit();
