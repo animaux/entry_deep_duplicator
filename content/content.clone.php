@@ -47,14 +47,28 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
 
         $this->duplications[$entry->get('id')] = $newEntry->get('id');
 
-        $index = 0;
+        $addedCopyMark = false;
 
         foreach ($fields as $field) {
             $computedData = $entry->getData($field->get('id'));
 
-            if ($index === 0 && $field->get('type') === 'input') {
-                $computedData['value'] .= ' - copy';
-                $computedData['handle'] .= '-copy';
+            if ($addedCopyMark === false && !empty($computedData['value'])) {
+                $addedCopyMark = true;
+
+                if ($field->get('type') === 'input') {
+                    $computedData['value'] .= '*';
+                } else if ($field->get('type') === 'textbox') {
+                    $computedData['value'] .= '*';
+                } else if ($field->get('type') === 'multilingual_textbox') {
+                    $computedData['value'] .= '*';
+                    foreach (FLang::getLangs() as $lang) {
+                        if (!empty($computedData['value-' . $lang])) {
+                            $computedData['value-' . $lang] .= '*';
+                        }
+                    }
+                } else {
+                    $addedCopyMark = false;
+                }
             }
 
             if ($field->get('type') === 'entry_relationship') {
@@ -109,7 +123,6 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
             }
 
             $newEntry->setData($field->get('id'), $computedData);
-            $index++;
         }
 
         $newEntry->commit();
