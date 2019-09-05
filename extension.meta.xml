@@ -17,6 +17,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.0.2" date="2019-09-05" min="4.0.0" max="4.x.x">
+			- Changed `*` for `Copy - `
+		</release>
 		<release version="1.0.1" date="2019-09-05" min="4.0.0" max="4.x.x">
 			- Changed ` - copy` for a single `*`. Added support for multilingual_textbox and textbox for this too.
 		</release>

@@ -56,14 +56,14 @@ class contentExtensionEntry_deep_duplicatorClone extends AdministrationPage
                 $addedCopyMark = true;
 
                 if ($field->get('type') === 'input') {
-                    $computedData['value'] .= '*';
+                    $computedData['value'] = 'Copy - ' . $computedData['value'];
                 } else if ($field->get('type') === 'textbox') {
-                    $computedData['value'] .= '*';
+                    $computedData['value'] .= 'Copy - ' . $computedData['value'];
                 } else if ($field->get('type') === 'multilingual_textbox') {
-                    $computedData['value'] .= '*';
+                    $computedData['value'] = 'Copy - ' . $computedData['value'];
                     foreach (FLang::getLangs() as $lang) {
                         if (!empty($computedData['value-' . $lang])) {
-                            $computedData['value-' . $lang] .= '*';
+                            $computedData['value-' . $lang] = 'Copy - ' . $computedData['value-' . $lang];
                         }
                     }
                 } else {
